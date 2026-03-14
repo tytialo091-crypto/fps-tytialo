@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>FPS Mobile — by Tytialo</title>
+  <meta name="description" content="Mainkan FPS Mobile Game by Tytialo" />
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css" />
+  
+  <!-- Favicon (opsional) -->
+  <link rel="icon" type="image/png" href="assets/images/logo.png" />
+</head>
+<body>
+  <!-- Menu awal -->
+  <div id="menu">
+    <img src="assets/images/logo.png" alt="Logo" class="logo" />
+    <h1>🔫 FPS MOBILE 🔫</h1>
+    <p>by Tytialo</p>
+    <button id="mulaiBtn">MULAI MAIN</button>
+  </div>
+
+  <!-- Canvas game -->
+  <canvas id="game-canvas"></canvas>
+
+  <!-- HUD -->
+  <div id="hud">
+    <div class="health-container">
+      <span>❤️</span>
+      <div class="health-bar">
+        <div class="health-fill" id="healthFill"></div>
+      </div>
+    </div>
+    <div class="ammo" id="ammoDisplay">30 / 90</div>
+  </div>
+
+  <!-- Kontrol -->
+  <div id="controls">
+    <div class="joystick-area" id="joystickBase">
+      <div class="joystick-knob" id="joystickKnob"></div>
+    </div>
+    <div class="fire-button" id="fireBtn">🔫</div>
+  </div>
+
+  <!-- Hit marker -->
+  <div id="hitmarker">✚</div>
+
+  <!-- Audio elements -->
+  <audio id="sfxTembak" preload="auto" style="display: none;">
+    <source src="assets/sounds/tembak.mp3" type="audio/mpeg" />
+  </audio>
+  <audio id="sfxKena" preload="auto" style="display: none;">
+    <source src="assets/sounds/kena.mp3" type="audio/mpeg" />
+  </audio>
+  <audio id="sfxKosong" preload="auto" style="display: none;">
+    <source src="assets/sounds/kosong.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- Three.js Library -->
+  <script src="https://unpkg.com/three@0.158.0/build/three.min.js"></script>
+  
+  <!-- Game Logic -->
+  <script src="game.js"></script>
+</body>
+  </html>
