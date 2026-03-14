@@ -1,0 +1,241 @@
+/* ===== RESET & VARIABLES ===== */
+:root {
+  --primary-green: #b6f5b6;
+  --neon-green: #0f0;
+  --dark-bg: #0a0a0a;
+  --health-color: #2ecc2e;
+  --ammo-bg: rgba(0,0,0,0.6);
+}
+
+* {
+  box-sizing: border-box;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  background: var(--dark-bg);
+  color: white;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+}
+
+/* ===== MENU ===== */
+#menu {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)), 
+              url('assets/images/background-menu.jpg') center/cover no-repeat;
+  z-index: 20;
+  backdrop-filter: blur(3px);
+}
+
+.logo {
+  width: 120px;
+  height: 120px;
+  margin-bottom: 20px;
+  border-radius: 50%;
+  border: 3px solid var(--neon-green);
+  box-shadow: 0 0 30px var(--neon-green);
+}
+
+#menu h1 {
+  font-size: clamp(2rem, 8vw, 3rem);
+  color: var(--primary-green);
+  text-shadow: 0 0 15px var(--neon-green);
+  margin-bottom: 10px;
+}
+
+#menu p {
+  font-size: 1.2rem;
+  color: #ccc;
+  margin-bottom: 30px;
+}
+
+#menu button {
+  background: #1a2b1a;
+  color: var(--primary-green);
+  border: 2px solid var(--neon-green);
+  padding: 15px 40px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border-radius: 50px;
+  box-shadow: 0 0 20px var(--neon-green);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+#menu button:active {
+  background: var(--neon-green);
+  color: #111;
+  transform: scale(0.95);
+}
+
+/* ===== CANVAS ===== */
+#game-canvas {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  touch-action: none;
+}
+
+/* ===== KONTROL ===== */
+#controls {
+  display: none;
+  position: fixed;
+  bottom: 30px;
+  left: 0;
+  width: 100%;
+  padding: 0 20px;
+  z-index: 15;
+  pointer-events: none;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.joystick-area {
+  pointer-events: auto;
+  width: 130px;
+  height: 130px;
+  background: rgba(20,20,20,0.7);
+  backdrop-filter: blur(4px);
+  border: 2px solid #3a6e3a;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 20px rgba(0,255,0,0.3);
+}
+
+.joystick-knob {
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(circle at 30% 30%, #a0f0a0, #2a5a2a);
+  border-radius: 50%;
+  border: 2px solid #8f8;
+  box-shadow: 0 0 15px var(--neon-green);
+  transition: transform 0.01s;
+}
+
+.fire-button {
+  pointer-events: auto;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #cc5555, #5a1e1e);
+  border: 4px solid #ff8888;
+  box-shadow: 0 0 30px #f44;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  color: white;
+  text-shadow: 0 0 10px black;
+  transition: 0.05s linear;
+}
+
+.fire-button:active {
+  transform: scale(0.9);
+  background: radial-gradient(circle at 30% 30%, #ff7b7b, #a12b2b);
+}
+
+/* ===== HUD ===== */
+#hud {
+  display: none;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  z-index: 16;
+  color: white;
+  font-weight: bold;
+  text-shadow: 0 0 5px black;
+  justify-content: space-between;
+  font-size: 1.3rem;
+}
+
+.health-container {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  background: rgba(0,0,0,0.5);
+  padding: 8px 15px;
+  border-radius: 30px;
+  border: 1px solid #7f7;
+}
+
+.health-bar {
+  width: 120px;
+  height: 20px;
+  background: #333;
+  border-radius: 20px;
+  border: 2px solid #7f7;
+  overflow: hidden;
+}
+
+.health-fill {
+  width: 85%;
+  height: 100%;
+  background: var(--health-color);
+  transition: width 0.2s;
+}
+
+.ammo {
+  background: var(--ammo-bg);
+  padding: 8px 20px;
+  border-radius: 40px;
+  border: 2px solid var(--primary-green);
+  backdrop-filter: blur(2px);
+}
+
+/* ===== HIT MARKER ===== */
+#hitmarker {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 4rem;
+  color: #f44;
+  text-shadow: 0 0 20px white;
+  opacity: 0;
+  transition: opacity 0.1s;
+  pointer-events: none;
+  z-index: 30;
+  font-weight: bold;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 480px) {
+  .joystick-area {
+    width: 110px;
+    height: 110px;
+  }
+  
+  .joystick-knob {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .fire-button {
+    width: 80px;
+    height: 80px;
+    font-size: 1.8rem;
+  }
+  
+  .health-bar {
+    width: 90px;
+  }
+  }
